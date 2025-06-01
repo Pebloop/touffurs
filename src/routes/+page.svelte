@@ -11,107 +11,116 @@
 		gsap.registerPlugin(DrawSVGPlugin);
 		gsap.registerPlugin(ScrollTrigger);
 
-		// main image animation
-		const tl = gsap.timeline({ repeat: -1, yoyo: true });
-		tl.fromTo(
-			".ballon",
-			{
-				y: 40,
-				x: -40,
-				rotation: 0
-			},
-			{
-				y: -20,
-				x: 200,
-				rotation: 360,
-				duration: 1,
-				ease: "power1.in",
-			}
-		)
+		const screenWidth = window.innerWidth;
+		const screenHeight = window.innerHeight;
 
-		.fromTo(
-			".ballon",
-			{
-				y: -20,
-				x: 200,
-				rotation: 360
-			},
-			{
-				y: 40,
-				x: 400,
-				rotation: 720,
-				duration: 1,
-				ease: "power1.Out",
-			}
-		)
+		const x1 = screenWidth * -0.05; // départ à 5% du bord gauche
+		const x2 = screenWidth * 0.175;  // milieu de l'écran
+		const x3 = screenWidth * 0.35; // arrivée à 95% du bord droit
 
+		const y1 = screenHeight * 0.3; // point haut (proche du haut de l'écran)
+		const y2 = screenHeight * 0.4; // point bas (départ et arrivée plus haut qu'avant)
+			
+		// Définition de la position initiale des bras
+		const chococatArmX = screenWidth * 0.0;  // bord gauche
+		const chacolatineArmX = screenWidth * 0.0; // bord droit
+
+		// Définition de la position initiale des queues
+		const chococatTailX = screenWidth * 0.0; // bord gauche
+		const chacolatineTailX = screenWidth * 0.0; // bord droit
+
+		function animateBallon() {
+			gsap.killTweensOf(".ballon");
+
+			gsap.timeline({ repeat: -1, yoyo: true })
+			.fromTo(
+				".ballon",
+				{ x: x1, y: y2, rotation: 0 },
+				{ x: x2, y: y1, rotation: 360, duration: 1, ease: "power1.in" }
+			)
+			.fromTo(
+				".ballon",
+				{ x: x2, y: y1, rotation: 360 },
+				{ x: x3, y: y2, rotation: 720, duration: 1, ease: "power1.Out" }
+			);
+		}
+
+		window.addEventListener('resize', animateBallon);
+		animateBallon();
+
+		// Animation des bras
 		const chococat_arm = gsap.timeline({ repeat: -1, yoyo: true });
-		chococat_arm.fromTo(
-			".chococat-bras",
-			{
-				rotation: 0,
-				x: 0,
-				y: 0
-			},
-			{
-				rotation: -20,
-				x: -10,
-				y: -10,
-				duration: 2,
-				ease: "power1.inOut",
-			}
-		)
+		chococat_arm
+			.fromTo(
+				".chococat-bras",
+				{
+					rotation: 0,
+					x: chococatArmX, // Position relative par rapport à l'écran
+					y: 0
+				},
+				{
+					rotation: -20,
+					x: chococatArmX - 10, // Déplacement relatif
+					y: -10,
+					duration: 2,
+					ease: "power1.inOut",
+				}
+			);
 
 		const chacolatine_arm = gsap.timeline({ repeat: -1, yoyo: true });
-		chacolatine_arm.fromTo(
-			".chacolatine-bras",
-			{
-				rotation: 20,
-				x: 10,
-				y: -10
-			},
-			{
-				rotation: 0,
-				x: 0,
-				y: 0,
-				duration: 2,
-				ease: "power1.inOut",
-			}
-		)
+		chacolatine_arm
+			.fromTo(
+				".chacolatine-bras",
+				{
+					rotation: 20,
+					x: chacolatineArmX, // Position relative par rapport à l'écran
+					y: -10
+				},
+				{
+					rotation: 0,
+					x: chacolatineArmX, // Reste à sa place pour une animation douce
+					y: 0,
+					duration: 2,
+					ease: "power1.inOut",
+				}
+			);
 
+		// Animation des queues
 		const chococat_tail = gsap.timeline({ repeat: -1, yoyo: true });
-		chococat_tail.fromTo(
-			".chococat-queue",
-			{
-				rotation: 0,
-				x: 0,
-				y: 0
-			},
-			{
-				rotation: -20,
-				x: -10,
-				y: -10,
-				duration: 2,
-				ease: "power1.inOut",
-			}
-		)
+		chococat_tail
+			.fromTo(
+				".chococat-queue",
+				{
+					rotation: 0,
+					x: chococatTailX, // Position relative par rapport à l'écran
+					y: 0
+				},
+				{
+					rotation: -20,
+					x: chococatTailX - 10, // Déplacement relatif
+					y: -10,
+					duration: 2,
+					ease: "power1.inOut",
+				}
+			);
 
 		const chacolatine_tail = gsap.timeline({ repeat: -1, yoyo: true });
-		chacolatine_tail.fromTo(
-			".chacolatine-queue",
-			{
-				rotation: 20,
-				x: 10,
-				y: -10
-			},
-			{
-				rotation: 0,
-				x: 0,
-				y: 0,
-				duration: 2,
-				ease: "power1.inOut",
-			}
-		)
+		chacolatine_tail
+			.fromTo(
+				".chacolatine-queue",
+				{
+					rotation: 20,
+					x: chacolatineTailX, // Position relative par rapport à l'écran
+					y: -10
+				},
+				{
+					rotation: 0,
+					x: chacolatineTailX, // Reste à sa place pour une animation douce
+					y: 0,
+					duration: 2,
+					ease: "power1.inOut",
+				}
+			);
 
 		// travel animation
 		const anchors = [

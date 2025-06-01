@@ -5,3 +5,10 @@ body {
     margin: 0;
     overflow-x: hidden;
 }
+
+.ballon {
+    margin: 0;         /* Aucune marge */
+    padding: 0;        /* Aucun remplissage */
+    left: 0;           /* À ajuster (devrait être géré par GSAP) */
+    top: 0;            /* À ajuster, pas nécessaire car géré par GSAP */
+}
