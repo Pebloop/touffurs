@@ -14,9 +14,52 @@
 		const screenWidth = window.innerWidth;
 		const screenHeight = window.innerHeight;
 
+<<<<<<< Updated upstream
 		const x1 = screenWidth * -0.05; // départ à 5% du bord gauche
 		const x2 = screenWidth * 0.175;  // milieu de l'écran
 		const x3 = screenWidth * 0.35; // arrivée à 95% du bord droit
+=======
+		const x1 = screenWidth * 0.25;
+		const x2 = screenWidth * 0.7;
+		const yBase = screenHeight * 0.5;
+		const yPeak = screenHeight * 0.35;
+
+		gsap.registerPlugin(MotionPathPlugin);
+
+		const tl = gsap.timeline({
+		repeat: -1,
+		defaults: { duration: 2, ease: "power1.inOut" }
+		});
+
+		// 💡 Positionne le ballon au point de départ
+		gsap.set(".ballon", { x: x1, y: yBase });
+
+		tl.to(".ballon", {
+		motionPath: {
+			path: [
+			{ x: x1, y: yBase },
+			{ x: (x1 + x2) / 2, y: yPeak },
+			{ x: x2, y: yBase }
+			],
+			curviness: 1.5,
+			autoRotate: true
+		},
+		rotation: 360
+		});
+
+		tl.to(".ballon", {
+		motionPath: {
+			path: [
+			{ x: x2, y: yBase },
+			{ x: (x1 + x2) / 2, y: yPeak },
+			{ x: x1, y: yBase }
+			],
+			curviness: 1.5,
+			autoRotate: true
+		},
+		rotation: 720 
+		});
+>>>>>>> Stashed changes
 
 		const y1 = screenHeight * 0.3; // point haut (proche du haut de l'écran)
 		const y2 = screenHeight * 0.4; // point bas (départ et arrivée plus haut qu'avant)
@@ -138,8 +181,8 @@
 			curviness: 1,
 		});
 
-		const path = document.querySelector("#path")!;
-		const svg = document.querySelector("#svg")!;
+		const path = document.querySelector("#path") as SVGPathElement;
+		const svg = document.querySelector("#svg") as SVGSVGElement;
 		const bus = document.querySelector("#bus")!;
 
 		path.setAttribute("d", MotionPathPlugin.rawPathToString(rawPath));
@@ -180,10 +223,13 @@
 
 	});
 
-	function pathEase(path, config={}) {
+	function pathEase(
+		path: SVGPathElement | string,
+		config: { smooth?: boolean | number } = {}
+	) {
 		let axis = "y",
 			precision = 1,
-			rawPath = MotionPathPlugin.cacheRawPathMeasurements(MotionPathPlugin.getRawPath(gsap.utils.toArray(path)[0]), Math.round(precision * 12)),
+			rawPath = MotionPathPlugin.cacheRawPathMeasurements(MotionPathPlugin.getRawPath(gsap.utils.toArray(path)[0] as SVGPathElement), Math.round(precision * 12)),
 			useX = axis === "x",
 			start = rawPath[0][useX ? 0 : 1],
 			end = rawPath[rawPath.length - 1][rawPath[rawPath.length-1].length - (useX ? 2 : 1)],
@@ -195,16 +241,17 @@
 			minIndex = 0,
 			smooth = [0],
 			minChange = (1 / l) * 0.6,
-			smoothRange = config.smooth === true ? 7 : Math.round(config.smooth) || 0,
+			smoothRange = config.smooth === true ? 7 : Math.round(config.smooth as number) || 0,
 			fullSmoothRange = smoothRange * 2,
-			getClosest = p => {
+			getClosest = (p: number) => {
 				while (positions[minIndex] <= p && minIndex++ < l) { }
 				a.push((p - positions[minIndex-1]) / (positions[minIndex] - positions[minIndex - 1]) * inc + minIndex * inc);
 				smoothRange && a.length > smoothRange && (a[a.length - 1] - a[a.length - 2] < minChange) && smooth.push(a.length - smoothRange);
 			},
 			i = 1;
 		for (; i < l; i++) {
-			positions[i] = (MotionPathPlugin.getPositionOnPath(rawPath, i / l)[axis] - start) / range;
+			const pos = MotionPathPlugin.getPositionOnPath(rawPath, i / l) as { x: number; y: number };
+			positions[i] = ((axis === "x" ? pos.x : pos.y) - start) / range;
 		}
 		positions[l] = 1;
 		for (i = 0; i < l; i++) {
@@ -225,7 +272,7 @@
 			});
 		}
 		l = a.length-1;
-		return p => {
+		return (p: number) => {
 			let i = p * l,
 				s = a[i | 0];
 			return i ? s + (a[Math.ceil(i)] - s) * (i % 1) : 0;
@@ -440,57 +487,57 @@
 				fill: white;
     }
 
-		.title {
-			color: #ffffff;
-			text-shadow: 0px 0px 10px #609cf6;
-			position: absolute;
-			top: calc(var(--spacing) * 30);
-			left: calc(50% - var(--spacing) * 40);
-		}
+	.title {
+		color: #ffffff;
+		text-shadow: 0px 0px 10px #609cf6;
+		position: absolute;
+		top: calc(var(--spacing) * 30);
+		left: calc(50% - var(--spacing) * 40);
+	}
 
-		.dates {
-			color: #ffffff;
-			text-shadow: 0px 0px 10px #609cf6;
-			position: absolute;
-			top: calc(var(--spacing) * 105);
-			left: calc(50% - var(--spacing) * 40);
-		}
+	.dates {
+		color: #ffffff;
+		text-shadow: 0px 0px 10px #609cf6;
+		position: absolute;
+		top: calc(var(--spacing) * 105);
+		left: calc(50% - var(--spacing) * 40);
+	}
 
-		.inscriptions {
-			color: #ffffff;
-			position: absolute;
-			top: calc(var(--spacing) * 150);
-			left: calc(50% - var(--spacing) * 40);
-		}
+	.inscriptions {
+		color: #ffffff;
+		position: absolute;
+		top: calc(var(--spacing) * 150);
+		left: calc(50% - var(--spacing) * 40);
+	}
 
-		.inscriptions button {
-			color: #ffffff;
-			background-color: #008ad8;
-		  padding: 20px;
-						  border-radius: 10px;
-		}
+	.inscriptions button {
+		color: #ffffff;
+		background-color: #008ad8;
+		padding: 20px;
+		border-radius: 10px;
+	}
 
-		.inscriptions button:hover {
-			background-color: #0077b3;
-		}
+	.inscriptions button:hover {
+		background-color: #0077b3;
+	}
 
-		.inscriptions button:disabled {
-			background-color: #3f5059;
-		}
+	.inscriptions button:disabled {
+		background-color: #3f5059;
+	}
 
-		.location {
-			position: absolute;
-			top: calc(var(--spacing) * 260);
-			left: calc(var(--spacing) * 30);
-			z-index: 1;
-		}
+	.location {
+		position: absolute;
+		top: calc(var(--spacing) * 260);
+		left: calc(var(--spacing) * 30);
+		z-index: 1;
+	}
 
-		.activite {
-			position: absolute;
-			top: calc(var(--spacing) * 450);
-			right: calc(var(--spacing) * 30);
-			z-index: 1;
-		}
+	.activite {
+		position: absolute;
+		top: calc(var(--spacing) * 450);
+		right: calc(var(--spacing) * 30);
+		z-index: 1;
+	}
 
 	.chococat-base {
 		position: absolute;
@@ -552,8 +599,6 @@
 
 	.ballon {
 		position: absolute;
-		bottom: calc(var(--spacing) * 110);
-		left: calc(var(--spacing) * 130);
 		width: calc(var(--spacing) * 30);
 		height: auto;
 		z-index: 1;
