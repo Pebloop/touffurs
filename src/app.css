@@ -12,3 +12,203 @@ body {
     left: 0;           /* À ajuster (devrait être géré par GSAP) */
     top: 0;            /* À ajuster, pas nécessaire car géré par GSAP */
 }
+
+.bg-special-green {
+    background-color: #7CF660;
+}
+
+path {
+    stroke-width: 20px;
+    stroke: #303030;
+    fill: none;
+}
+
+    .bullet-point {
+            color: white;
+            fill: white;
+}
+
+.title {
+    color: #ffffff;
+    text-shadow: 0px 0px 10px #609cf6;
+    position: absolute;
+    top: calc(var(--spacing) * 30);
+    left: calc(50% - var(--spacing) * 40);
+}
+
+.dates {
+    color: #ffffff;
+    text-shadow: 0px 0px 10px #609cf6;
+    position: absolute;
+    top: calc(var(--spacing) * 105);
+    left: calc(50% - var(--spacing) * 40);
+}
+
+.inscriptions {
+    color: #ffffff;
+    position: absolute;
+    top: calc(var(--spacing) * 150);
+    left: calc(50% - var(--spacing) * 40);
+}
+
+.inscriptions button {
+    color: #ffffff;
+    background-color: #008ad8;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.inscriptions button:hover {
+    background-color: #0077b3;
+}
+
+.inscriptions button:disabled {
+    background-color: #3f5059;
+}
+
+.location {
+    position: absolute;
+    top: calc(var(--spacing) * 260);
+    left: calc(var(--spacing) * 30);
+    z-index: 1;
+}
+
+.activite {
+    position: absolute;
+    top: calc(var(--spacing) * 450);
+    right: calc(var(--spacing) * 30);
+    z-index: 1;
+}
+
+.chococat-base {
+    position: absolute;
+    bottom: calc(var(--spacing) * 20);
+    left: calc(var(--spacing) * 25);
+    width: calc(var(--spacing) * 110);
+    height: auto;
+    z-index: 1;
+}
+
+.chococat-queue {
+    transform-origin: right;
+    position: absolute;
+    bottom: calc(var(--spacing) * 45);
+    left: calc(var(--spacing) * 20);
+    width: calc(var(--spacing) * 60);
+    height: auto;
+    z-index: 1;
+}
+
+.chococat-bras {
+    transform-origin: left;
+    position: absolute;
+    bottom: calc(var(--spacing) * 80);
+    left: calc(var(--spacing) * 108);
+    width: calc(var(--spacing) * 30);
+    height: auto;
+    z-index: 2;
+}
+
+.chacolatine-base {
+    position: absolute;
+    bottom: calc(var(--spacing) * 20);
+    right: calc(var(--spacing) * 20);
+    width: calc(var(--spacing) * 110);
+    height: auto;
+    z-index: 1;
+}
+
+.chacolatine-bras {
+    transform-origin: right;
+    position: absolute;
+    bottom: calc(var(--spacing) * 80);
+    right: calc(var(--spacing) * 108);
+    width: calc(var(--spacing) * 30);
+    height: auto;
+    z-index: 2;
+}
+
+.chacolatine-queue {
+    transform-origin: left;
+    position: absolute;
+    bottom: calc(var(--spacing) * 45);
+    right: calc(var(--spacing) * 15);
+    width: calc(var(--spacing) * 60);
+    height: auto;
+    z-index: 1;
+}
+
+.ballon {
+    position: absolute;
+    width: calc(var(--spacing) * 30);
+    height: auto;
+    z-index: 1;
+}
+
+.input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid #c3e6cb;
+}
+
+header {
+  backdrop-filter: blur(10px);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
+  min-height: 64px;
+}
+
+.nav-link,
+.nav-link-contact,
+.nav-link-logo {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2rem;
+  transition: box-shadow 0.3s ease;
+  text-decoration: none;
+  color: white;
+  white-space: nowrap;
+}
+
+.nav-link {
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-link:first-child {
+  border-left: none;
+}
+
+.nav-link:hover {
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.nav-link-logo {
+  padding-left: 0;
+  padding-right: 1rem;
+}
+
+.nav-link-contact {
+  margin-left: 1rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(6px);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-link-contact:hover {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}

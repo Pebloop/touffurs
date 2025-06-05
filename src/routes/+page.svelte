@@ -6,6 +6,17 @@
 	import { onMount } from 'svelte';
 	import Header from '$lib/Header.svelte';
 
+  let scrolled = false;
+
+  onMount(() => {
+    const handleScroll = () => {
+      scrolled = window.scrollY > 10;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  });
+
 	onMount(() => {
 		gsap.registerPlugin(MotionPathPlugin);
 		gsap.registerPlugin(DrawSVGPlugin);
@@ -14,10 +25,10 @@
 		const screenWidth = window.innerWidth;
 		const screenHeight = window.innerHeight;
 
-		const x1 = screenWidth * 0.25;
-		const x2 = screenWidth * 0.7;
-		const yBase = screenHeight * 0.45;
-		const yPeak = screenHeight * 0.35;
+		const xballon1 = screenWidth * 0.30;
+		const xballon2 = screenWidth * 0.65;
+		const yballonBase = screenHeight * 0.25;
+		const yballonPeak = screenHeight * 0.15;
 
 		gsap.registerPlugin(MotionPathPlugin);
 
@@ -27,32 +38,32 @@
 		});
 
 		// 💡 Positionne le ballon au point de départ
-		gsap.set(".ballon", { x: x1, y: yBase });
+		gsap.set(".ballon", { x: xballon1, y: yballonBase });
 
 		tl.to(".ballon", {
 		motionPath: {
 			path: [
-			{ x: x1, y: yBase },
-			{ x: (x1 + x2) / 2, y: yPeak },
-			{ x: x2, y: yBase }
+			{ x: xballon1, y: yballonBase },
+			{ x: (xballon1 + xballon2) / 2, y: yballonPeak },
+			{ x: xballon2, y: yballonBase }
 			],
 			curviness: 1.5,
-			autoRotate: true
+			autoRotate: false
 		},
-		rotation: 360
+		rotation: "+=360"
 		});
 
 		tl.to(".ballon", {
 		motionPath: {
 			path: [
-			{ x: x2, y: yBase },
-			{ x: (x1 + x2) / 2, y: yPeak },
-			{ x: x1, y: yBase }
+			{ x: xballon2, y: yballonBase },
+			{ x: (xballon1 + xballon2) / 2, y: yballonPeak },
+			{ x: xballon1, y: yballonBase }
 			],
 			curviness: 1.5,
-			autoRotate: true
+			autoRotate: false
 		},
-		rotation: 720 
+		rotation: "-=720" 
 		});
 
 		const chococat_arm = gsap.timeline({ repeat: -1, yoyo: true });
@@ -178,7 +189,6 @@
 			)
 		});
 
-
 	});
 
 	function pathEase(
@@ -238,11 +248,35 @@
 	}
 </script>
 
-<Header/>
+
+<header class={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out
+  ${scrolled ? 'py-2 shadow-lg bg-white/20' : 'py-4 shadow-md bg-white/30'}`}>
+  <nav class="flex items-center justify-between max-w-screen-xl mx-auto h-full text-white text-sm font-medium px-4 rounded-lg overflow-hidden">
+    
+    <!-- Logo + texte -->
+    <a href="/" class="nav-link-logo flex items-center">
+      <img src="/logo.png" alt="Logo" class={`transition-all duration-300 ${scrolled ? 'h-10' : 'h-14'}`} />
+      <span class="ml-2 font-bold text-lg drop-shadow-sm">Des vacances tout en furs !</span>
+    </a>
+
+    <!-- Liens nav au centre absolu -->
+	<div class="absolute left-1/2 transform -translate-x-1/2 h-full flex ml-2 font-bold text-lg drop-shadow-sm">
+		<a href="/lieux" class="nav-link">Les lieux</a>
+		<a href="/attendees" class="nav-link">Attendees</a>
+		<a href="/activites" class="nav-link">Activités</a>
+	</div>
+
+    <!-- Contact -->
+    <a href="/contact" class="nav-link-contact">
+      Contact
+    </a>
+  </nav>
+</header>
+
 
 	<div class="">
 	<div class="flex flex-col items-center justify-center title w-96">
-		<img src="/logo.png" class="z-10"/>
+		<img src="/logo.png" alt="Logo" class="z-10"/>
 		<h1 class="text-xl text-white font-bold text-center z-10">Des vacances tout en furs !</h1>
 	</div>
 	<div class="flex flex-col items-center justify-center dates z-10">
@@ -252,6 +286,7 @@
 		<button class="text-3xl font-bold text-center m-4 mb-0" disabled>Inscriptions fermées</button>
 		<h1 class="text-xl font-bold text-center m-4 mt-0">Ouverture le 4 mai 2026 à 18h</h1>
 	</div>
+	
 	<img src="/image%20principale/background.png" alt="background" class="w-full h-auto absolute left-0 top-0" />
 	<img src="/image%20principale/chococat_base.png" alt="chococat-base" class="absolute h-auto chococat-base" />
 	<img src="/image%20principale/chococat_queue.png" alt="chococat-queue" class="absolute h-auto chococat-queue" />
@@ -427,139 +462,3 @@
 	</div>
 </div>
 
-<style lang="postcss">
-		@reference "tailwindcss";
-
-		.bg-special-green {
-			background-color: #7CF660;
-		}
-
-    path {
-        stroke-width: 20px;
-        stroke: #303030;
-        fill: none;
-    }
-
-		.bullet-point {
-				color: white;
-				fill: white;
-    }
-
-	.title {
-		color: #ffffff;
-		text-shadow: 0px 0px 10px #609cf6;
-		position: absolute;
-		top: calc(var(--spacing) * 30);
-		left: calc(50% - var(--spacing) * 40);
-	}
-
-	.dates {
-		color: #ffffff;
-		text-shadow: 0px 0px 10px #609cf6;
-		position: absolute;
-		top: calc(var(--spacing) * 105);
-		left: calc(50% - var(--spacing) * 40);
-	}
-
-	.inscriptions {
-		color: #ffffff;
-		position: absolute;
-		top: calc(var(--spacing) * 150);
-		left: calc(50% - var(--spacing) * 40);
-	}
-
-	.inscriptions button {
-		color: #ffffff;
-		background-color: #008ad8;
-		padding: 20px;
-		border-radius: 10px;
-	}
-
-	.inscriptions button:hover {
-		background-color: #0077b3;
-	}
-
-	.inscriptions button:disabled {
-		background-color: #3f5059;
-	}
-
-	.location {
-		position: absolute;
-		top: calc(var(--spacing) * 260);
-		left: calc(var(--spacing) * 30);
-		z-index: 1;
-	}
-
-	.activite {
-		position: absolute;
-		top: calc(var(--spacing) * 450);
-		right: calc(var(--spacing) * 30);
-		z-index: 1;
-	}
-
-	.chococat-base {
-		position: absolute;
-		bottom: calc(var(--spacing) * 20);
-		left: calc(var(--spacing) * 25);
-		width: calc(var(--spacing) * 110);
-		height: auto;
-		z-index: 1;
-	}
-
-	.chococat-queue {
-		transform-origin: right;
-		position: absolute;
-		bottom: calc(var(--spacing) * 45);
-		left: calc(var(--spacing) * 20);
-		width: calc(var(--spacing) * 60);
-		height: auto;
-		z-index: 1;
-	}
-
-	.chococat-bras {
-		transform-origin: left;
-		position: absolute;
-		bottom: calc(var(--spacing) * 80);
-		left: calc(var(--spacing) * 108);
-		width: calc(var(--spacing) * 30);
-		height: auto;
-		z-index: 2;
-	}
-
-	.chacolatine-base {
-		position: absolute;
-		bottom: calc(var(--spacing) * 20);
-		right: calc(var(--spacing) * 20);
-		width: calc(var(--spacing) * 110);
-		height: auto;
-		z-index: 1;
-	}
-
-	.chacolatine-bras {
-		transform-origin: right;
-		position: absolute;
-		bottom: calc(var(--spacing) * 80);
-		right: calc(var(--spacing) * 108);
-		width: calc(var(--spacing) * 30);
-		height: auto;
-		z-index: 2;
-	}
-
-	.chacolatine-queue {
-		transform-origin: left;
-		position: absolute;
-		bottom: calc(var(--spacing) * 45);
-		right: calc(var(--spacing) * 15);
-		width: calc(var(--spacing) * 60);
-		height: auto;
-		z-index: 1;
-	}
-
-	.ballon {
-		position: absolute;
-		width: calc(var(--spacing) * 30);
-		height: auto;
-		z-index: 1;
-	}
-
-</style>
