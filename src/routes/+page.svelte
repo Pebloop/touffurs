@@ -267,7 +267,7 @@
 	</div>
 
     <!-- Contact -->
-    <a href="/contact" class="nav-link-contact">
+    <a href="/contact" class="nav-link-contact ml-2 font-bold text-lg drop-shadow-sm">
       Contact
     </a>
   </nav>
