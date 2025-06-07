@@ -1,20 +1,11 @@
 <script lang="ts">
+    
   import Header from '$lib/Header.svelte'
   import { onMount } from 'svelte';
 
-  let scrolled = false;
-
-	onMount(() => {
-		const handleScroll = () => {
-		scrolled = window.scrollY > 30;
-		};
-
-		window.addEventListener('scroll', handleScroll);
-		return () => window.removeEventListener('scroll', handleScroll);
-	});
 </script>
 
-<Header {scrolled} />
+<Header/>
 
 <!-- ✅ Background fixé -->
 <img src="/image%20principale/background.png" alt="background" class="fixed w-full h-full object-cover top-0 left-0 -z-10" />

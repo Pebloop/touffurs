@@ -5,8 +5,8 @@
 	import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 	import { ScrollTrigger } from "gsap/ScrollTrigger";
 	import { onMount } from 'svelte';
-
-	export let scrolled: boolean;
+		
+	let scrolled = false;
 
 	function handleScroll() {
 		scrolled = window.scrollY > 10;
