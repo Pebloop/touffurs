@@ -2,6 +2,8 @@
 	
 	import Header from '$lib/Header.svelte';
   	import { onMount } from 'svelte';
+	import Footer from '$lib/Footer.svelte';
+
 
 	let name = '';
 	let email = '';
@@ -33,10 +35,10 @@
 <Header {scrolled} />
 
 <!-- ✅ Background fixé -->
-<img src="/image%20principale/background.png" alt="background" class="fixed w-full h-full object-cover top-0 left-0 -z-10" />
+<img src="/image%20principale/background.png" alt="background" class="w-full h-auto absolute left-0 top-0" />
 
 <!-- ✅ Conteneur centré -->
-<main class="pt-[8rem] flex justify-center items-start min-h-screen px-4">
+<main class="pt-[8rem] flex justify-center items-start min-h-screen px-4 bg-special-green">
 	<div class="backdrop-blur-md bg-white/40 border border-white/30 rounded-xl shadow-xl p-8 w-full max-w-xl">
 		<h1 class="text-2xl font-bold mb-4 text-center text-gray-800">Contactez-nous</h1>
 
@@ -69,3 +71,4 @@
 	</div>
 </main>
 
+<Footer/>

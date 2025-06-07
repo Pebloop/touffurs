@@ -5,6 +5,7 @@
 	import { ScrollTrigger } from "gsap/ScrollTrigger";
 	import { onMount } from 'svelte';
 	import Header from '$lib/Header.svelte';
+	import Footer from '$lib/Footer.svelte';
 
 
 </script>
@@ -12,26 +13,26 @@
 <Header/>
 
 	<div class="">
-	<div class="flex flex-col items-center justify-center title w-96">
-		<img src="/logo.png" alt="Logo" class="z-10"/>
-		<h1 class="text-xl text-white font-bold text-center z-10">Des vacances tout en furs !</h1>
-	</div>
-	<div class="flex flex-col items-center justify-center dates z-10">
-		<h1 class="text-3xl font-bold text-center m-4">Du 10 au 13 juillet 2026</h1>
-	</div>
-	<div class="flex flex-col items-center justify-center z-10 inscriptions">
-		<button class="text-3xl font-bold text-center m-4 mb-0" disabled>Inscriptions fermées</button>
-		<h1 class="text-xl font-bold text-center m-4 mt-0">Ouverture le 4 mai 2026 à 18h</h1>
-	</div>
-	
-	<img src="/image%20principale/background.png" alt="background" class="w-full h-auto absolute left-0 top-0" />
-	<img src="/image%20principale/chococat_base.png" alt="chococat-base" class="absolute h-auto chococat-base" />
-	<img src="/image%20principale/chococat_queue.png" alt="chococat-queue" class="absolute h-auto chococat-queue" />
-	<img src="/image%20principale/chococat_bras.png" alt="chococat-bras" class="absolute h-auto chococat-bras" />
-	<img src="/image%20principale/chacolatine_base.png" alt="chacolatine" class="absolute h-auto chacolatine-base" />
-	<img src="/image%20principale/chacolatine_bras.png" alt="chacolatine-bras" class="absolute h-auto chacolatine-bras" />
-	<img src="/image%20principale/chacolatine_queue.png" alt="chacolatine-queue" class="absolute h-auto chacolatine-queue" />
-	<img src="/image%20principale/ballon.png" alt="ballon" class="absolute h-auto ballon" />
+		<div class="flex flex-col items-center justify-center title w-96">
+			<img src="/logo.png" alt="Logo" class="z-10"/>
+			<h1 class="text-xl text-white font-bold text-center z-10">Des vacances tout en furs !</h1>
+		</div>
+		<div class="flex flex-col items-center justify-center dates z-10">
+			<h1 class="text-3xl font-bold text-center m-4">Du 10 au 13 juillet 2026</h1>
+		</div>
+		<div class="flex flex-col items-center justify-center z-10 inscriptions">
+			<button class="text-3xl font-bold text-center m-4 mb-0" disabled>Inscriptions fermées</button>
+			<h1 class="text-xl font-bold text-center m-4 mt-0">Ouverture le 4 mai 2026 à 18h</h1>
+		</div>
+		
+		<img src="/image%20principale/background.png" alt="background" class="w-full h-auto absolute left-0 top-0" />
+		<img src="/image%20principale/chococat_base.png" alt="chococat-base" class="absolute h-auto chococat-base" />
+		<img src="/image%20principale/chococat_queue.png" alt="chococat-queue" class="absolute h-auto chococat-queue" />
+		<img src="/image%20principale/chococat_bras.png" alt="chococat-bras" class="absolute h-auto chococat-bras" />
+		<img src="/image%20principale/chacolatine_base.png" alt="chacolatine" class="absolute h-auto chacolatine-base" />
+		<img src="/image%20principale/chacolatine_bras.png" alt="chacolatine-bras" class="absolute h-auto chacolatine-bras" />
+		<img src="/image%20principale/chacolatine_queue.png" alt="chacolatine-queue" class="absolute h-auto chacolatine-queue" />
+		<img src="/image%20principale/ballon.png" alt="ballon" class="absolute h-auto ballon" />
 	</div>
 
 <div class="bg-special-green">
@@ -142,60 +143,4 @@
 	</button>
 </div>
 
-<div class="bg-gray-900 w-full flex flex-col items-center justify-between text-white">
-	<div class="flex flex-row justify-between w-full">
-
-		<div class="flex flex-col w-1/2 m-4">
-			<h2 class="text-3xl font-bold text-white">Touffurs</h2>
-			<p>Une convention par Toulousefurs</p>
-		</div>
-
-		<div class="flex flex-col w-1/2 m-4">
-			<h2 class="text-3xl font-bold text-white">A propos</h2>
-			<a href="/conditions" class="w-1/2 text-white">
-				Termes et conditions
-			</a>
-			<a href="/legal" class="w-1/2 text-white">
-				Mentions légales
-			</a>
-			<a href="/credits" class="w-1/2 text-white">
-				Crédits
-			</a>
-		</div>
-
-		<div class="flex flex-col w-1/2 m-4">
-			<h2 class="text-3xl font-bold text-white">Soutenir le projet</h2>
-			<a href="/" class="bg-blue-700 text-white rounded-2xl p-4 mt-6 w-1/2 text-center">
-				Faire un don
-			</a>
-		</div>
-
-		<div class="flex flex-col w-1/2 m-4">
-			<h2 class="text-3xl font-bold text-white">Nous contacter</h2>
-			<a href="/contact/staff" class="w-1/2 text-white">
-				Staff
-			</a>
-			<a href="/contact/safety" class="w-1/2 text-white">
-				Safety
-			</a>
-		</div>
-
-		<div class="flex flex-col w-1/2 m-4">
-			<h2 class="text-3xl font-bold text-white">Suivez-nous</h2>
-			<a href="https://twitter.com/Touffurs" target="_blank" rel="noreferrer" class="w-1/2 text-white">
-				Twitter
-			</a>
-			<a href="https://www.twitch.tv/touffurs" target="_blank" rel="noreferrer" class="w-1/2 text-white">
-				Twitch
-			</a>
-			<a href="https://www.instagram.com/touffurs/" target="_blank" rel="noreferrer" class="w-1/2 text-white">
-				Instagram
-			</a>
-			<a href="https://www.facebook.com/touffurs/" target="_blank" rel="noreferrer" class="w-1/2 text-white">
-				Facebook
-			</a>
-		</div>
-
-	</div>
-</div>
-
+<Footer/>

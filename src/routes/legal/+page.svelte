@@ -1,6 +1,7 @@
 <script lang="ts">  
 	
 	import Header from '$lib/Header.svelte';
+	import Footer from '$lib/Footer.svelte';
   	import { onMount } from 'svelte';
 
 	let name = '';
@@ -23,11 +24,11 @@
 <Header/>
 
 <!-- ✅ Background fixé -->
-<img src="/image%20principale/background.png" alt="background" class="fixed w-full h-full object-cover top-0 left-0 -z-10" />
+<img src="/image%20principale/background.png" alt="background" class="w-full h-auto absolute left-0 top-0" />
 
 <!-- ✅ Conteneur centré -->
-<main class="pt-[8rem] flex justify-center items-start min-h-screen px-4">
-	<div class="max-w-3xl bg-white/10 backdrop-blur-lg p-6 rounded-2xl shadow-lg space-y-6">
+<main class="pt-[8rem] flex justify-center items-start min-h-screen px-4 bg-special-green">
+    <div class="mt-30 mb-10 prose prose-invert w-[70%] mx-auto p-8 backdrop-blur-md bg-white/40 border border-white/30 rounded-xl shadow-xl">
 		<h1 class="text-3xl font-bold text-center mb-4">Mentions légales</h1>
 
 		<section>
@@ -92,3 +93,4 @@
 	</div>	
 </main>
 
+<Footer/>
