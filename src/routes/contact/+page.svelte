@@ -5,34 +5,48 @@
 	import Footer from '$lib/Footer.svelte';
 
 
-	let name = '';
-	let email = '';
-	let message = '';
+	let Nom = '';
+	let Email = '';
+	let Message = '';
 	let success = false;
 
-	function handleSubmit() {
-		console.log({ name, email, message });
-		success = true;
-		name = '';
-		email = '';
-		message = '';
-		setTimeout(() => (success = false), 3000);
+	async function handleSubmit() {
+		try {
+			const response = await fetch('https://app-fff52561-df06-4c55-a0e9-7abe82722bca.cleverapps.io/api/contacts', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					data: {
+						Nom,
+						Email,
+						Message,
+					},
+				}),
+			});
+
+			if (!response.ok) {
+				console.error('Erreur lors de l’envoi :', await response.json());
+				return;
+			}
+
+			success = true;
+			Nom = '';
+			Email = '';
+			Message = '';
+			setTimeout(() => (success = false), 3000);
+
+		} catch (error) {
+			console.error('Erreur réseau :', error);
+		}
 	}
 
-	let scrolled = false;
 
-	onMount(() => {
-		const handleScroll = () => {
-		scrolled = window.scrollY > 30;
-		};
-
-		window.addEventListener('scroll', handleScroll);
-		return () => window.removeEventListener('scroll', handleScroll);
-	});
 </script>
 
 
-<Header {scrolled} />
+<Header/>
 
 <!-- ✅ Background fixé -->
 <img src="/image%20principale/background.png" alt="background" class="w-full h-auto absolute left-0 top-0" />
@@ -51,17 +65,17 @@
 		<form on:submit|preventDefault={handleSubmit} class="space-y-4">
 			<div class="form-group flex flex-col">
 				<label for="name" class="font-semibold mb-1">Nom :</label>
-				<input id="name" type="text" bind:value={name} required class="input" />
+				<input id="name" type="text" bind:value={Nom} required class="input" />
 			</div>
 
 			<div class="form-group flex flex-col">
 				<label for="email" class="font-semibold mb-1">Email :</label>
-				<input id="email" type="email" bind:value={email} required class="input" />
+				<input id="email" type="email" bind:value={Email} required class="input" />
 			</div>
 
 			<div class="form-group flex flex-col">
 				<label for="message" class="font-semibold mb-1">Message :</label>
-				<textarea id="message" bind:value={message} required class="input min-h-[120px] resize-none"></textarea>
+				<textarea id="message" bind:value={Message} required class="input min-h-[120px] resize-none"></textarea>
 			</div>
 
 			<button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg">
