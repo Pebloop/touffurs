@@ -3,14 +3,18 @@
 	import Header from '$lib/Header.svelte';
   	import { onMount } from 'svelte';
 	import Footer from '$lib/Footer.svelte';
-
+	import { fade } from 'svelte/transition';
 
 	let Nom = '';
 	let Email = '';
 	let Message = '';
 	let success = false;
 
+	let showPopup = false;
+
 	async function handleSubmit() {
+		console.log("✉️ Soumission du formulaire");
+
 		try {
 			const response = await fetch('https://app-fff52561-df06-4c55-a0e9-7abe82722bca.cleverapps.io/api/contacts', {
 				method: 'POST',
@@ -32,10 +36,15 @@
 			}
 
 			success = true;
+			showPopup = true;
 			Nom = '';
 			Email = '';
 			Message = '';
-			setTimeout(() => (success = false), 3000);
+
+			setTimeout(() => {
+				success = false;
+				showPopup = false;
+			}, 5000);
 
 		} catch (error) {
 			console.error('Erreur réseau :', error);
@@ -43,10 +52,17 @@
 	}
 
 
+
 </script>
 
 
 <Header/>
+
+{#if showPopup}
+	<div transition:fade class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white font-semibold py-2 px-4 rounded-lg shadow-lg z-50">
+		✅ Message envoyé
+	</div>
+{/if}
 
 <!-- ✅ Background fixé -->
 <img src="/image%20principale/background.png" alt="background" class="w-full h-auto absolute left-0 top-0" />
@@ -63,11 +79,12 @@
 		{/if}
 
 		<form on:submit|preventDefault={handleSubmit} class="space-y-4">
+			<!-- ✅ Champs du formulaire -->
 			<div class="form-group flex flex-col">
 				<label for="name" class="font-semibold mb-1">Nom :</label>
 				<input id="name" type="text" bind:value={Nom} required class="input" />
 			</div>
-
+			
 			<div class="form-group flex flex-col">
 				<label for="email" class="font-semibold mb-1">Email :</label>
 				<input id="email" type="email" bind:value={Email} required class="input" />
