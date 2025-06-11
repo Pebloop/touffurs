@@ -7,10 +7,10 @@ body {
 }
 
 .ballon {
-    margin: 0;         /* Aucune marge */
-    padding: 0;        /* Aucun remplissage */
-    left: 0;           /* À ajuster (devrait être géré par GSAP) */
-    top: 0;            /* À ajuster, pas nécessaire car géré par GSAP */
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 0;
 }
 
 .bg-special-green {

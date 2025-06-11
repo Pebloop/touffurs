@@ -7,15 +7,41 @@
 	import { onMount } from 'svelte';
 		
 	let scrolled = false;
+	let header: HTMLElement | null = null;
 
 	function handleScroll() {
 		scrolled = window.scrollY > 10;
 	}
 
+	// Scroll bandeau
 	onMount(() => {
-		window.addEventListener('scroll', handleScroll);
-		handleScroll();
-		return () => window.removeEventListener('scroll', handleScroll);
+		// Écoute scroll pour scrolled + couleur dynamique
+		function onScroll() {
+			handleScroll();
+
+			if (!header) return;
+
+			const scrollTop = window.scrollY;
+			const maxScroll = document.body.scrollHeight - window.innerHeight;
+			const scrollFraction = Math.min(scrollTop / maxScroll, 1);
+
+			const startColor = { r: 241, g: 172, b: 95 };   // orange
+			const endColor   = { r: 73,  g: 164, b: 208 };  // blue
+
+			// Changement couleur dynamique scrolling
+			const r = Math.round(startColor.r + (endColor.r - startColor.r) * scrollFraction);
+			const g = Math.round(startColor.g + (endColor.g - startColor.g) * scrollFraction);
+			const b = Math.round(startColor.b + (endColor.b - startColor.b) * scrollFraction);
+			const a = 0.6 + 0.2 * scrollFraction; 
+
+			header.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${a})`;
+		}
+
+		window.addEventListener('scroll', onScroll);
+		onScroll(); // call once on mount to set initial color
+
+		// Nettoyage
+		return () => window.removeEventListener('scroll', onScroll);
 	});
 	
 
@@ -190,6 +216,7 @@
 				}
 			)
 		});
+		
 
 	});
 
@@ -250,8 +277,14 @@
 	}
 </script>
 
-<header class={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out
-  ${scrolled ? 'py-2 shadow-lg bg-white/20' : 'py-4 shadow-md bg-white/30'}`}>
+<!-- Touffurs hiver -->
+<header
+  bind:this={header}
+  id="dynamicHeader"
+  class={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out
+  ${scrolled ? 'py-2 shadow-lg' : 'py-4 shadow-md'}`}>
+
+
     <nav class="flex items-center justify-between max-w-screen-xl mx-auto h-full text-white text-sm font-medium px-4 rounded-lg overflow-hidden">
     
     <!-- Logo + texte -->
