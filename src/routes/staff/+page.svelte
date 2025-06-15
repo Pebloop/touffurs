@@ -15,7 +15,7 @@
 
     onMount(async () => {
       try {
-        const res = await fetch('http://localhost:8080/api/users?populate[avatar]=true&populate[role]=true');
+        const res = await fetch('http://app-fff52561-df06-4c55-a0e9-7abe82722bca.cleverapps.io/api/users?populate[avatar]=true&populate[role]=true');
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
         const users: any[] = await res.json();
