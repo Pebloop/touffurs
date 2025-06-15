@@ -64,8 +64,7 @@
 	</div>
 {/if}
 
-<!-- ✅ Background fixé -->
-<img src="/image%20principale/background.png" alt="background" class="w-full h-auto absolute left-0 top-0" />
+<div class="fixed-background"></div>
 
 <!-- ✅ Conteneur centré -->
 <main class="pt-[8rem] flex justify-center items-start min-h-screen px-4 bg-special-green">

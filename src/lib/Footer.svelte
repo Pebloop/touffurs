@@ -1,6 +1,6 @@
 <!-- src/lib/Footer.svelte -->
 <footer class="bg-gray-900 text-white w-full px-6 py-12">
-	<div class="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+	<div class="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-8">
 		
 		<!-- Touffurs -->
 		<div>
@@ -30,8 +30,8 @@
 		<div>
 			<h2 class="text-xl font-bold mb-2">Contact</h2>
 			<ul class="space-y-1 text-sm">
-				<li><a href="/contact/staff" class="hover:underline">Staff</a></li>
-				<li><a href="/contact/safety" class="hover:underline">Safety</a></li>
+				<li><a href="staff" class="hover:underline">Staff</a></li>
+				<li><a href="safety" class="hover:underline">Safety</a></li>
 			</ul>
 		</div>
 
@@ -48,7 +48,7 @@
 
 	</div>
 
-	<p class="text-center text-xs text-gray-400 mt-12">
+	<p class="text-center text-xs text-gray-400 mt-1">
 		© {new Date().getFullYear()} Toulouse Fur. Tous droits réservés.
 	</p>
 </footer>

@@ -12,28 +12,28 @@
 
 <Header/>
 
-	<div class="">
-		<div class="flex flex-col items-center justify-center title w-96">
-			<img src="/logo.png" alt="Logo" class="z-10"/>
-			<h1 class="text-xl text-white font-bold text-center z-10">Des vacances tout en furs !</h1>
-		</div>
-		<div class="flex flex-col items-center justify-center dates z-10">
-			<h1 class="text-3xl font-bold text-center m-4">Du 10 au 13 juillet 2026</h1>
-		</div>
-		<div class="flex flex-col items-center justify-center z-10 inscriptions">
-			<button class="text-3xl font-bold text-center m-4 mb-0" disabled>Inscriptions fermées</button>
-			<h1 class="text-xl font-bold text-center m-4 mt-0">Ouverture le 4 mai 2026 à 18h</h1>
-		</div>
-		
-		<img src="/image%20principale/background.png" alt="background" class="w-full h-auto absolute left-0 top-0" />
-		<img src="/image%20principale/chococat_base.png" alt="chococat-base" class="absolute h-auto chococat-base" />
-		<img src="/image%20principale/chococat_queue.png" alt="chococat-queue" class="absolute h-auto chococat-queue" />
-		<img src="/image%20principale/chococat_bras.png" alt="chococat-bras" class="absolute h-auto chococat-bras" />
-		<img src="/image%20principale/chacolatine_base.png" alt="chacolatine" class="absolute h-auto chacolatine-base" />
-		<img src="/image%20principale/chacolatine_bras.png" alt="chacolatine-bras" class="absolute h-auto chacolatine-bras" />
-		<img src="/image%20principale/chacolatine_queue.png" alt="chacolatine-queue" class="absolute h-auto chacolatine-queue" />
-		<img src="/image%20principale/ballon.png" alt="ballon" class="absolute h-auto ballon" />
+<div class="">
+	<div class="flex flex-col items-center justify-center title w-96">
+		<img src="/logo.png" alt="Logo" class="z-10"/>
+		<h1 class="text-xl text-white font-bold text-center z-10">Des vacances tout en furs !</h1>
 	</div>
+	<div class="flex flex-col items-center justify-center dates z-10">
+		<h1 class="text-3xl font-bold text-center m-4">Du 10 au 13 juillet 2026</h1>
+	</div>
+	<div class="flex flex-col items-center justify-center z-10 inscriptions">
+		<button class="text-3xl font-bold text-center m-4 mb-0" disabled>Inscriptions fermées</button>
+		<h1 class="text-xl font-bold text-center m-4 mt-0">Ouverture le 4 mai 2026 à 18h</h1>
+	</div>
+	
+	<img src="/image%20principale/background.png" alt="background" class="w-full h-auto absolute left-0 top-0" />
+	<img src="/image%20principale/chococat_base.png" alt="chococat-base" class="absolute h-auto chococat-base" />
+	<img src="/image%20principale/chococat_queue.png" alt="chococat-queue" class="absolute h-auto chococat-queue" />
+	<img src="/image%20principale/chococat_bras.png" alt="chococat-bras" class="absolute h-auto chococat-bras" />
+	<img src="/image%20principale/chacolatine_base.png" alt="chacolatine" class="absolute h-auto chacolatine-base" />
+	<img src="/image%20principale/chacolatine_bras.png" alt="chacolatine-bras" class="absolute h-auto chacolatine-bras" />
+	<img src="/image%20principale/chacolatine_queue.png" alt="chacolatine-queue" class="absolute h-auto chacolatine-queue" />
+	<img src="/image%20principale/ballon.png" alt="ballon" class="absolute h-auto ballon" />
+</div>
 
 <div class="bg-special-green">
 	<div class="h-screen"></div>
