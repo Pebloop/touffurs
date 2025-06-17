@@ -13,29 +13,39 @@
 
     let staffList: StaffMember[] = [];
 
-    onMount(async () => {
-      try {
-        const res = await fetch('https://app-fff52561-df06-4c55-a0e9-7abe82722bca.cleverapps.io/api/users?populate[avatar]=true&populate[role]=true');
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+  onMount(async () => {
+    try {
+      // Effectue une requête HTTP GET vers l'API pour récupérer la liste des utilisateurs,
+      // en demandant que les champs 'avatar' et 'role' soient inclus dans la réponse
+      const res = await fetch('https://app-fff52561-df06-4c55-a0e9-7abe82722bca.cleverapps.io/api/users?populate[avatar]=true&populate[role]=true');
+      // Si la réponse n'est pas OK (statut HTTP hors 200-299), lève une erreur
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
-        const users: any[] = await res.json();
-        console.log('Fetched users:', users);
-        console.log('Filtered staff:', users.filter(user => user.role?.name === 'Staff' && user.avatar));
+      // Convertit la réponse JSON en tableau d'utilisateurs
+      const users: any[] = await res.json();
+      // Affiche tous les utilisateurs récupérés dans la console (pour debug)
+      console.log('Fetched users:', users);
+      // Affiche dans la console uniquement les utilisateurs ayant le rôle "Staff" et un avatar (pour debug)
+      console.log('Filtered staff:', users.filter(user => user.role?.name === 'Staff' && user.avatar));
 
-        staffList = users
-          .filter(user => user.role?.name === 'Staff' && user.avatar)
-          .map(user => ({
-            id: user.id,
-            name: user.username,
-            role: user.role.name,
-            description: user.description_staff,
-            image: user.avatar.formats?.medium?.url || user.avatar.url
-          }));
+      // Filtre les utilisateurs pour ne garder que ceux ayant le rôle "Staff" et un avatar,
+      // puis crée un nouveau tableau d'objets formatés pour l'affichage
+      staffList = users
+        .filter(user => user.role?.name === 'Staff' && user.avatar)
+        .map(user => ({
+          id: user.id, // identifiant unique
+          name: user.username, // nom d'utilisateur
+          role: user.role.name, // nom du rôle (ici "Staff")
+          description: user.description_staff, // description spécifique au staff
+          // utilise l'URL de l'avatar en format "medium" si disponible, sinon l'URL par défaut
+          image: user.avatar.formats?.medium?.url || user.avatar.url
+        }));
 
-      } catch (error) {
-        console.error('Fetch error:', error);
-      }
-    });
+    } catch (error) {
+      // En cas d'erreur lors de la requête ou du traitement, affiche l'erreur dans la console
+      console.error('Fetch error:', error);
+    }
+  });
 
   </script>
 
