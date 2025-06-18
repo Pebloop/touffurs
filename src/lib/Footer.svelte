@@ -53,6 +53,7 @@
 			<ul class="space-y-1 text-sm">
 				<li><a href="staff" class="hover:underline">Staff</a></li>
 				<li><a href="safety" class="hover:underline">Safety</a></li>
+				<li><a href="contact" class="hover:uderline">Nous contacter</a></li>
 			</ul>
 		</div>
 
@@ -72,5 +73,7 @@
 
 	<p class="text-center text-xs text-gray-400 mt-1">
 		© {new Date().getFullYear()} Toulouse Fur. Tous droits réservés.
+		<br>
+		Créé avec <span class="text-red-500">♥</span> par l'équipe Touffurs.
 	</p>
 </footer>
